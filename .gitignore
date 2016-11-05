@@ -1,6 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 
-/node_modules
-/_v2/LeapSDK/.idea
+/node_modules/
+/_v2/LeapSDK/.idea/
 /_v2/LeapSDK/docs
-.idea
+/.idea/
