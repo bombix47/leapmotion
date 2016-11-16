@@ -3,7 +3,7 @@
  */
 
 var five = require("johnny-five");
-//var songs = require("j5-songs");
+var songs = require("j5-songs");
 var board = new five.Board({
     port: "/dev/cu.usbmodem1411"
 });
@@ -12,11 +12,11 @@ board.on("ready", function() {
     var led = new five.Leds([2,3,4]);
     led.blink(500);
 
-    var servo = new five.Servo(5);
+    var servo = new five.Servo(7);
 
     servo.sweep();
 
-    /*var piezo = new five.Piezo(8);
+    var piezo = new five.Piezo(8);
     // Load a song object
     var song = songs.load('tetris-theme');
 
@@ -27,7 +27,7 @@ board.on("ready", function() {
     // Injects the piezo into the repl
     board.repl.inject({
         piezo: piezo
-    });*/
+    });
 
     // Plays a song
     /*piezo.play({

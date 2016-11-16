@@ -2,9 +2,10 @@
  * Created by Gameboy97242 on 22/10/2016.
  */
 var fs = require('fs');
+var Leap = require('leapjs');
 
 // file is included here:
-eval(fs.readFileSync('./_v2/LeapSDK/leap.js')+'');
+//eval(fs.readFileSync('./_v2/LeapSDK/leap.js')+'');
 
 var five = require("johnny-five");
 //var songs = require("j5-songs");
@@ -65,7 +66,7 @@ board.on("ready", function() {
     action: {},
     handleGrab: function () {
         var led = new five.Led(2);
-        led.blink(500);
+        led.blink(250);
         console.log("GRAAAAAAAAAAAAAAAAAAB");
     },
     handleSwipe: function () {
@@ -92,15 +93,25 @@ var LeapController = function () {
                             GestureHandler.handleGrab();
                             break;
                         case 'swipe':
+                            var led = new five.Led(4);
+                            led.blink(250);
+                            console.log("SWIIIIIIIIPE");
                             break;
                         case 'circle':
+                            var led = new five.Led(3);
+                            led.blink(250);
+                            console.log("CIRCLEEEEEEE");
                             break;
-
+                        default :
+                            var led = new five.Led(3);
+                            led.blink(250);
+                            console.log("AUTRE MOUV");
                     }
 
                     paused = true;
                     setTimeout(function () {
                             paused = false;
+                            led.stop().off();
                         }, 1500
                     )
                 }

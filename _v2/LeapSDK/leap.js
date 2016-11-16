@@ -376,6 +376,7 @@
 
     BrowserConnection.prototype.useSecure = function(){
         return location.protocol === 'https:'
+        //return true;
     }
 
     BrowserConnection.prototype.getScheme = function(){
