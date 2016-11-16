@@ -5,7 +5,8 @@
   "main": "myLeap.js",
   "dependencies": {
     "j5-songs": "^0.0.9",
-    "johnny-five": "^0.10.3"
+    "johnny-five": "^0.10.3",
+    "leapjs":"0.6.4"
   },
   "devDependencies": {},
   "scripts": {
