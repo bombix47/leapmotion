@@ -61,12 +61,15 @@ board.on("ready", function() {
      ],
      tempo: 100
      });*/
+    var outputs = [];
 
     GestureHandler = {
     action: {},
     handleGrab: function () {
-        var led = new five.Led(2);
-        led.blink(250);
+        var ledvert = new five.Led(2);
+        outputs.push(ledvert);
+        //console.log(outputs);
+        ledvert.blink(250);
         console.log("GRAAAAAAAAAAAAAAAAAAB");
     },
     handleSwipe: function () {
@@ -93,17 +96,20 @@ var LeapController = function () {
                             GestureHandler.handleGrab();
                             break;
                         case 'swipe':
-                            var led = new five.Led(4);
-                            led.blink(250);
+                            var ledbleu = new five.Led(4);
+                            outputs.push(ledbleu);
+                            ledbleu.blink(250);
                             console.log("SWIIIIIIIIPE");
                             break;
                         case 'circle':
-                            var led = new five.Led(3);
+                            var led = new five.Led(4);
+                            outputs.push(led);
                             led.blink(250);
                             console.log("CIRCLEEEEEEE");
                             break;
                         default :
-                            var led = new five.Led(3);
+                            var led = new five.Led(4);
+                            outputs.push(led);
                             led.blink(250);
                             console.log("AUTRE MOUV");
                     }
@@ -111,9 +117,10 @@ var LeapController = function () {
                     paused = true;
                     setTimeout(function () {
                             paused = false;
-                            led.stop().off();
-                        }, 1500
-                    )
+                            outputs.forEach(function(led) {
+                                led.stop().off();
+                            });
+                    }, 1500)
                 }
 
             }
