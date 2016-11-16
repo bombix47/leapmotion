@@ -63,6 +63,7 @@ board.on("ready", function() {
      });*/
     var outputs = [];
 
+
     GestureHandler = {
     action: {},
     handleGrab: function () {
