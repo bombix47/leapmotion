@@ -10,7 +10,7 @@ var Leap = require('leapjs');
 var five = require("johnny-five");
 //var songs = require("j5-songs");
 var board = new five.Board({
-    port: "/dev/cu.usbmodem1411"
+    port: "/dev/ttyACM0"
 });
 
 board.on("ready", function() {
@@ -65,8 +65,8 @@ board.on("ready", function() {
     GestureHandler = {
     action: {},
     handleGrab: function () {
-        var led = new five.Led(2);
-        led.blink(250);
+        // var led = new five.Led(13);
+        // led.blink(250);
         console.log("GRAAAAAAAAAAAAAAAAAAB");
     },
     handleSwipe: function () {
@@ -93,17 +93,34 @@ var LeapController = function () {
                             GestureHandler.handleGrab();
                             break;
                         case 'swipe':
-                            var led = new five.Led(4);
+                            var led = new five.Led(13);
+
                             led.blink(250);
                             console.log("SWIIIIIIIIPE");
                             break;
                         case 'circle':
-                            var led = new five.Led(3);
+                            var led = new five.Led(13);
                             led.blink(250);
                             console.log("CIRCLEEEEEEE");
+                            var servo = new five.Servo({
+                                pin: 7
+                            });
+                            if(GestureHandler.action.direction == 'left'){
+                                servo.sweep({
+                                    range: [180, 0],
+                                    step: 1
+                                });
+                            }
+                            if(GestureHandler.action.direction == 'right'){
+                                servo.sweep({
+                                    range: [0, 180],
+                                    step: 1
+                                });
+                            }
+
                             break;
                         default :
-                            var led = new five.Led(3);
+                            var led = new five.Led(13);
                             led.blink(250);
                             console.log("AUTRE MOUV");
                     }
@@ -111,7 +128,12 @@ var LeapController = function () {
                     paused = true;
                     setTimeout(function () {
                             paused = false;
+                        if(led){
                             led.stop().off();
+                        }
+                        if(servo){
+                            servo.stop();
+                        }
                         }, 1500
                     )
                 }
